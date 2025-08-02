@@ -5,9 +5,11 @@ from PIL import Image
 from io import BytesIO
 import time
 
+LIMIT = 500  # Character limit for posts
+
 # --- CONFIG ---
 st.set_page_config(page_title="🐦 AI Post + Image Generator", page_icon="🐦")
-char_limits = {"Twitter/X": 280, "LinkedIn": 3000, "Facebook": 2000, "Instagram": 2200}
+char_limits = {"Twitter/X": LIMIT, "LinkedIn": LIMIT, "Facebook": LIMIT, "Instagram": LIMIT}
 
 # --- SESSION STATE ---
 for key in ['generated_post', 'search_results', 'generated_image', 'api_key']:
@@ -47,7 +49,8 @@ def generate_post_and_image(api_key, topic, style, platform):
     Based on the following info about {topic}:
     {search_text}
 
-    Write a {style.lower()} post for {platform}.
+    Write a {style.lower()} post for {platform}. You are the best POST generator.
+    Make it engaging, informative, and suitable for the platform.
     Include relevant hashtags, emojis, and keep it under {char_limits[platform]} characters.
     """
 
@@ -60,7 +63,7 @@ def generate_post_and_image(api_key, topic, style, platform):
 
     # Step 3: Generate the image (IMAGE only)
     image_prompt = f"""
-    Create a futuristic, creative image that visually represents the topic "{topic}".
+    Create a creative image that visually represents the topic "{topic}".
     Use the latest information provided below for inspiration:
     {search_text}
     """
@@ -91,7 +94,7 @@ if api_key:
 platform = st.selectbox("📱 Platform", list(char_limits.keys()))
 style = st.selectbox("🎭 Post Style", ["Informative", "Professional", "Casual", "News-like"])
 quick_topics = ["AI", "Climate", "Crypto", "Space", "Tech", "Health", "Sports", "Entertainment"]
-topic = st.text_input("🔍 Topic", placeholder="e.g., AI in healthcare")
+topic = st.text_input("🔍 Topic", placeholder="e.g., Latest trends in crypto")
 selected_quick = st.selectbox("Or pick a quick topic", [""] + quick_topics)
 if selected_quick and not topic:
     topic = selected_quick
