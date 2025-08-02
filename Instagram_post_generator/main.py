@@ -136,4 +136,4 @@ if st.session_state.generated_post:
 
 # --- API HELP ---
 if not api_key:
-    st.warning("Get a free API key from: https://makersuite.google.com/app/apikey")
+    st.warning("Get a free API key from: https://aidtudio.google.com/app/apikey")
