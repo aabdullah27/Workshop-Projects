@@ -5,7 +5,7 @@ from PIL import Image
 from io import BytesIO
 import time
 
-LIMIT = 500  # Character limit for posts
+LIMIT = 1000  # Character limit for posts
 
 # --- CONFIG ---
 st.set_page_config(page_title="🐦 AI Post + Image Generator", page_icon="🐦")
